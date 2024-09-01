@@ -1,0 +1,45 @@
+---
+title: "ProjectPlan"
+author: "Samuel Aboelkhir"
+date: "2024-08-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Main goal :
+~~~~~~~~~~~~~
+- Create an app that acts as medical hub for patients and medical providers, containing a patient's full medical profile, including full medical history, medical conditions, inherited traits, previous diagnosis, lab analysis results, chronic, previous and current medications, to facilitate healthcare streamline and facilitate healthcare services.
+
+
+# Main ideas :
+~~~~~~~~~~~~~~~
+
+## App wise :
+~~~~~~~~~~~~~~
+1) Add tabs for, "Diagnosis history", "Lab analysis history", "Medications", "Health Profile", in the main menu.
+2) "Medications" should have "Current", "Chronic", and "Previous" tabs
+3) Add another tab for partner "Hospitals", "Clinics", "Labs", and "Pharmacies"
+
+## Database wise :
+~~~~~~~~~~~~~~~~~~
+1) Create an encrypted database for each medical history tab and user credentials, and manage proper access privileges.
+2) Set up a dedicated server for the database.
+3) Figure out how to create account types (Hospital/clinic, lab, pharmacy, patient).
+
+# Other Considerations :
+~~~~~~~~~~~~~~~~~~~~~~~~~
+1) Medical booking service.
+2) Map showing the locations and numbers of partners. (similar to medright)
+3) Discounts for app users
+
+# In progress :
+~~~~~~~~~~~~~~~~
+- Primary Database
+- Primary UI
+- Primary Server
+
+# Done :
+~~~~~~~~~
