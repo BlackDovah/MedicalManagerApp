@@ -75,7 +75,7 @@ function(input, output, session) {
                 })
         })
         observeEvent(input$create_account, {
-                if(input$new_user %in% dbGetQuery(con, "select * from credentials")) {
+                if(input$new_user %in% dbGetQuery(con, "select * from credentials")$user) {
                         output$Email_availability = renderText({"This email already exists"})
                 } else {
                         hashed_password = password_store(input$new_password)

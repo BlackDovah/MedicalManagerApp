@@ -7,3 +7,5 @@ library(shinymanager)
 library(sodium)
 library(shinyauthr)
 
+options(shiny.reactlog = TRUE)
+shiny::reactiveConsole(TRUE)

@@ -3,12 +3,12 @@ tagList(
     Shiny.addCustomMessageHandler('reload', function(message) {
       location.reload();
     });
-    # Shiny.addCustomMessageHandler('checkReload', function(message) {
-    #   if (localStorage.getItem('reloaded') === 'true') {
-    #     Shiny.setInputValue('show_reload_message', true, {priority: 'event'});
-    #     localStorage.removeItem('reloaded');
-    #   }
-    # });
+    Shiny.addCustomMessageHandler('checkReload', function(message) {
+      if (localStorage.getItem('reloaded') === 'true') {
+        Shiny.setInputValue('show_reload_message', true, {priority: 'event'});
+        localStorage.removeItem('reloaded');
+      }
+    });s
   "))),
         fluidPage(theme = shinythemes::shinytheme("united"),
                   # div(id = "reload_message", style = "color: red; font-weight: bold;"),
