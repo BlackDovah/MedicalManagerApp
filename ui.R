@@ -8,7 +8,7 @@ tagList(
         Shiny.setInputValue('show_reload_message', true, {priority: 'event'});
         localStorage.removeItem('reloaded');
       }
-    });s
+    });
   "))),
         fluidPage(theme = shinythemes::shinytheme("united"),
                   # div(id = "reload_message", style = "color: red; font-weight: bold;"),
@@ -35,9 +35,16 @@ tagList(
                                                 mainPanel(
                                                         textInput("new_user", "Email"),
                                                         passwordInput("new_password", "Password"),
+                                                        selectInput("Account_type",
+                                                                    "Please select an account type",
+                                                                    c("Patient" = "Patient",
+                                                                      "Physician" = "Physician",
+                                                                      "Medical Laboratory" = "Medical Laboratory"),
+                                                        ),
                                                         actionButton("create_account", "Create Account"),
                                                         verbatimTextOutput("creation_status"),
-                                                        textOutput("Email_availability")
+                                                        textOutput("Email_availability"),
+                                                        textOutput("type")
                                                 )
                                        )
                                    )

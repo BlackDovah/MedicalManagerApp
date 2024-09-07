@@ -1,50 +1,76 @@
 library(shiny)
-library(shinyjs)
+library(leaflet)
 
-ui <- tagList(
-        useShinyjs(),
-        tags$head(tags$script(HTML("
-    Shiny.addCustomMessageHandler('reload', function(message) {
-      localStorage.setItem('reloaded', 'true');
-      location.reload();
-    });
-
-    Shiny.addCustomMessageHandler('checkReload', function(message) {
-      if (localStorage.getItem('reloaded') === 'true') {
-        Shiny.setInputValue('show_reload_message', true, {priority: 'event'});
-        localStorage.removeItem('reloaded');
-      }
-    });
-  "))),
-        fluidPage(
-                titlePanel("Reload Message Example"),
-                sidebarLayout(
-                        sidebarPanel(
-                                actionButton("reload_btn", "Reload Session")
-                        ),
-                        mainPanel(
-                                div(id = "reload_message", style = "color: red; font-weight: bold;")
-                        )
-                )
+ui <- fluidPage(
+        # Inline CSS to style the settings button and icon color
+        tags$style(HTML("
+    #settings_button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: #4CAF50;  /* Green background color */
+      border: none;
+      padding: 10px;
+      border-radius: 50%;  /* Make it circular */
+      color: white;        /* Set icon color to white */
+    }
+    #settings_button i {
+      font-size: 24px;
+    }
+    #settings_button:hover {
+      background-color: #45a049; /* Darker green when hovered */
+    }
+  ")),
+        
+        # Application title
+        titlePanel("Shiny App with Leaflet Map in Settings Modal"),
+        
+        # Settings icon as an action button
+        actionButton("settings_button", label = NULL, icon = icon("cog")),
+        
+        # Placeholder for the rest of the app content
+        mainPanel(
+                h3("App Content Here")
         )
 )
 
 server <- function(input, output, session) {
-        output$text <- renderText({
-                paste("The time is:", Sys.time())
+        # Show modal dialog with tabs when settings button is clicked
+        observeEvent(input$settings_button, {
+                showModal(modalDialog(
+                        title = "Settings",
+                        
+                        # Tabset panel inside the modal
+                        tabsetPanel(
+                                tabPanel("General Settings",
+                                         checkboxInput("setting1", "Enable Feature 1", value = TRUE),
+                                         sliderInput("setting2", "Adjust Feature 2", min = 0, max = 100, value = 50)
+                                ),
+                                tabPanel("Map",
+                                         h3("Interactive Map"),
+                                         leafletOutput("mymap", height = 400)  # Adding leaflet map output
+                                ),
+                                tabPanel("About",
+                                         h3("About This Application"),
+                                         p("This is a sample Shiny app with a settings modal and tabs.")
+                                )
+                        ),
+                        
+                        easyClose = TRUE,
+                        footer = tagList(
+                                modalButton("Close"),
+                                actionButton("save_settings", "Save Settings")
+                        )
+                ))
         })
         
-        observeEvent(input$reload_btn, {
-                session$sendCustomMessage(type = 'reload', message = list())
-        })
-        
-        observe({
-                session$sendCustomMessage(type = 'checkReload', message = list())
-        })
-        
-        observeEvent(input$show_reload_message, {
-                shinyjs::html("reload_message", "The app has been reloaded.")
+        # Render the Leaflet map
+        output$mymap <- renderLeaflet({
+                leaflet() %>%
+                        addTiles() %>%  # Default OpenStreetMap tiles
+                        setView(lng = -122.4194, lat = 37.7749, zoom = 10)  # Center the map on San Francisco
         })
 }
 
-shinyApp(ui, server)
+# Run the application 
+shinyApp(ui = ui, server = server)

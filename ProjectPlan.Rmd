@@ -19,15 +19,15 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## App wise :
 ~~~~~~~~~~~~~~
-1) Add tabs for, "Diagnosis history", "Lab analysis history", "Medications", "Health Profile", in the main menu.
-2) "Medications" should have "Current", "Chronic", and "Previous" tabs
-3) Add another tab for partner "Hospitals", "Clinics", "Labs", and "Pharmacies"
+1) Allow adjustments in the settings tab to reflect on the database and get saved between sessions or automatically loaded from the database.
+2) "Medications" should have "Current", "Chronic", and "Previous" tabs.
+3) Add conditional UI based on the account type.
 
 ## Database wise :
 ~~~~~~~~~~~~~~~~~~
-1) Create an encrypted database for each medical history tab and user credentials, and manage proper access privileges.
-2) Set up a dedicated server for the database.
-3) Figure out how to create account types (Hospital/clinic, lab, pharmacy, patient).
+1) Set up a dedicated server for the database.
+2) Add tables with for diagnosis, medical lab reports, and pharmacuticles, with a connection key to the main credentials table.
+3) Learn AWS
 
 # Other Considerations :
 ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -43,3 +43,8 @@ knitr::opts_chunk$set(echo = TRUE)
 
 # Done :
 ~~~~~~~~~
+- Authentication
+- Settings button
+- Rendering the base map
+- Adding account types
+- Added all the principal tabs
