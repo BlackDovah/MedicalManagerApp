@@ -16,7 +16,7 @@ tagList(
                   div(id = "sign",
                       navbarPage("", 
                                  id = "signIn/Up",
-                                 tabPanel("Login page",
+                                 tabPanel("Login",
                                           sidebarPanel("Welcome to your comprehensive medical reference."),
                                           mainPanel(
                                                   textInput("email", "Email"),
@@ -28,7 +28,7 @@ tagList(
                                           # )
                                  ), # tabPanel-login
                                  
-                                 tabPanel("Account creation",
+                                 tabPanel("Create Account",
                                           sidebarPanel("Welcome to your comprehensive medical reference."),
                                           mainPanel(
                                                   textInput("new_user", "Email"),

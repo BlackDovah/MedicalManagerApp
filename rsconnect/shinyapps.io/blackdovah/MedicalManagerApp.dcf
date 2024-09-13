@@ -5,9 +5,9 @@ account: blackdovah
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 12689184
-bundleId: 9099640
+bundleId: 9099648
 url: https://blackdovah.shinyapps.io/MedicalManagerApp/
 version: 1
 asMultiple: FALSE
 asStatic: FALSE
-ignoredFiles: ProjectPlan.Rmd|saved codes/test.R|test.R|tests/testthat/setup-shinytest2.R|tests/testthat.R|docs
+ignoredFiles: ProjectPlan.Rmd|saved codes/test.R|test.R|tests/testthat/setup-shinytest2.R|tests/testthat.R
