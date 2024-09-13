@@ -54,10 +54,10 @@ main_ui = fluidPage(theme = shinythemes::shinytheme("united"),
                                tabPanel("Medication", "This panel is intentionally left blank"),
                                tabPanel("Medical Providers",
                                         leafletOutput("providers_map", height = 400)),
-                               tabPanel("Show Credentials",
-                                        checkboxInput("credentials", "check to show credentials"),
-                                        tableOutput("cred")
-                               )
+                               # tabPanel("Show Credentials",
+                               #          checkboxInput("credentials", "check to show credentials"),
+                               #          tableOutput("cred")
+                               # )
                     )
 )
 

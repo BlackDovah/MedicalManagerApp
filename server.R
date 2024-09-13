@@ -1,26 +1,34 @@
 function(input, output, session) {
-        con <- dbConnect(RMariaDB::MariaDB(), group = "credentials")
-        credentials = loginServer(
-                id = "login",
-                data = dbGetQuery(con, "select * from credentials"),
-                user_col = user,
-                pwd_col = password,
-                sodium_hashed = TRUE,
-        ) # credentials
+        # con <- dbConnect(RMariaDB::MariaDB(), group = "credentials")
+        con = dbConnect(RSQLite::SQLite(), "Users.sqlite")
         
-        ## UI
+        ## UI/Login
         
-        observe({
-                req(credentials()$user)
-                removeUI(selector = "#LoginTab")
-                removeUI(selector = "#CreateAccountTab")
-                removeUI(selector = "#Selector")
-                output$main_ui = renderUI({
-                        main_ui
-                }) # Output
+        observeEvent(input$logi_but, {
+                
+                ## Credentials check
+                
+                pass_status = FALSE
+                email = input$email
+                password = input$password
+                
+                if(email %in% dbGetQuery(con, "select * from credentials")$user && 
+                   password_verify(dbGetQuery(con, "select * from credentials where user = ?", 
+                                              params = email)$password, password)
+                ) {pass_status = TRUE} 
+                
+                ## Render UI if user and pass are correct
+                
+                if(pass_status == TRUE){
+                        removeUI(selector = "#sign")
+                        output$main_ui = renderUI({
+                                main_ui
+                        }) # Output
+                } else {output$account_exists = 
+                        renderText("Your email or password is incorrect")}
         }) # Observe
         
-        ### End of UI
+        ### End of UI/Login
         
         ## Main page logic
         
@@ -104,7 +112,7 @@ function(input, output, session) {
                 leaflet() %>%
                         addTiles() %>%  # Default OpenStreetMap tiles
                         setView(lng = -122.4194, lat = 37.7749, zoom = 10)  # Center the map on San Francisco
-        }) # renderLeaglet
+        }) # renderLeaflet
         
         ### End of ProvidersMap
         
