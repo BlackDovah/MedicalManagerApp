@@ -1,3 +1,4 @@
+Link to the app : https://blackdovah.github.io/MedicalManagerApp/
 # Main goal :
 ~~~~~~~~~~~~~
 - Create an app that acts as medical hub for patients and medical providers,
