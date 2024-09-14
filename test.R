@@ -1,48 +1,24 @@
-# div(id = "reload_message", style = "color: red; font-weight: bold;"),
-titlePanel("Welcome to MedHub!"),
-          div(id = "Selector",
-              selectInput("Login_Signup",
-                          "Please login, or create an account",
-                          c(Login = "Login", 'Create Account' = "Create Account")
-              )
-          ),
-          conditionalPanel(condition = "input.Login_Signup == 'Login'",
-                           div(id = "LoginTab",
-                               tabPanel("Login page",
-                                        # loginUI(id = "login")
-                                        sidebarPanel("Welcome to your comprehensive medical reference."),
-                                        mainPanel(
-                                                textInput("email", "Email"),
-                                                passwordInput("password", "Password"),
-                                                textOutput("account_exists"),
-                                                actionButton("logi_but", "Login"),
-                                        )
-                               )
-                           )
-          ),
+library(shiny)
+library(shinydashboard)
+library(mailR) 
+ui <- dashboardPage(
+        header = dashboardHeader(title = "head"),
+        sidebar = dashboardSidebar("hello"),
+        body = fluidRow(
+                column(3, wellPanel(
+                        textInput("email", "Email"),
+                        actionButton("submitResetBtn","Request Password Reset")))),
+        br() 
+)
+footer = dashboardFooter()
 
 
-          conditionalPanel(condition = "input.Login_Signup == 'Create Account'",
-                           div(id = "CreateAccountTab",
-                               tabPanel("Account creation",
-                                        sidebarPanel("Welcome to your comprehensive medical reference."),
-                                        mainPanel(
-                                                textInput("new_user", "Email"),
-                                                passwordInput("new_password", "Password"),
-                                                selectInput("Account_type",
-                                                            "Please select an account type",
-                                                            c("Patient" = "Patient",
-                                                              "Physician" = "Physician",
-                                                              "Medical Laboratory" = "Medical Laboratory"),
-                                                ),
-                                                actionButton("create_account", "Create Account"),
-                                                verbatimTextOutput("creation_status"),
-                                                textOutput("Email_availability"),
-                                                textOutput("type")
-                                        )
-                               )
-                           )
-          ),
-          uiOutput("main_ui"),
-))
 
+server <- function(input, output) {
+        observeEvent(input$submitResetBtn,{
+                send_mass_mail("admin@example.com", 
+                               recipients = input$email %>% unique()) 
+        })
+}
+
+shinyApp(ui, server)
