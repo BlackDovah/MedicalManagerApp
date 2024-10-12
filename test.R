@@ -1,24 +1,28 @@
 library(shiny)
-library(shinydashboard)
-library(mailR) 
-ui <- dashboardPage(
-        header = dashboardHeader(title = "head"),
-        sidebar = dashboardSidebar("hello"),
-        body = fluidRow(
-                column(3, wellPanel(
-                        textInput("email", "Email"),
-                        actionButton("submitResetBtn","Request Password Reset")))),
-        br() 
-)
-footer = dashboardFooter()
 
+ui <- fluidPage(
+        tagList(
+        tags$html(
+                tags$head(
+                        tags$title("html page in shiny")
+                ),
+                tags$body(h1('H1'),
+                          p("writing a paragraph"),
+                          tags$ul(
+                                  tags$li("a list"),
+                                  tags$li("another one"),
+                                  tags$li("a nested list will live here",
+                                          tags$ol(
+                                                  tags$li("nested list")
+                                          )
+                                  ))
+                )
+        )
+)
+)
 
 
 server <- function(input, output) {
-        observeEvent(input$submitResetBtn,{
-                send_mass_mail("admin@example.com", 
-                               recipients = input$email %>% unique()) 
-        })
 }
 
 shinyApp(ui, server)

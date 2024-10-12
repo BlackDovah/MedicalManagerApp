@@ -1,0 +1,55 @@
+* {
+        box-sizing: border-box;
+}
+
+#title {
+        font-size: 150%;
+        margin-left: 42%;
+        position: relative;
+        align-items: center;
+        text-align: center;
+}
+#sign {
+        position: absolute;
+
+        width: 500px;
+        top: 40%;
+        left: 35%;
+        align-items: center;
+        text-align: center;
+}
+
+/*#login, #create {
+margin-left: 450px; 
+text-align: center;
+}
+#login_but, #create_but {
+margin-right: 215px;
+}
+a:hover, a:active {
+background-color: blue;
+}*/
+
+body {
+
+font-size: 200%;
+}
+
+#main {
+        font-size: 20px;
+}
+
+#main > div {
+        font-size: 16px;
+}
+#settings_button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: transparent;
+    border: none;
+    color: grey;
+  }
+  #settings_button i {
+    font-size: 16px;
+  }

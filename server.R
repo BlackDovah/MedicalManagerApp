@@ -55,6 +55,9 @@ function(input, output, session) {
         observeEvent(input$create_account, {
                 if(input$new_user %in% dbGetQuery(con, "select * from credentials")$user) {
                         output$Email_availability = renderText({"This email already exists"})
+                } 
+                else if(input$new_user == "" | input$new_password == "") {
+                        output$Email_availability = renderText({"The email or password has not been inserted"})
                 } else {
                         hashed_password = password_store(input$new_password)
                         type = 0
@@ -74,12 +77,12 @@ function(input, output, session) {
         
         ### End of account creation logic
         
-        # observe({
-        #         session$sendCustomMessage(type = 'checkReload', message = list())
-        # })
-        # observeEvent(input$show_reload_message, {
-        #         shinyjs::html("reload_message", "Account created successfully, please login")
-        # })
+        observe({
+                session$sendCustomMessage(type = 'checkReload', message = list())
+        })
+        observeEvent(input$show_reload_message, {
+                shinyjs::html("reload_message", "Account created successfully, please login")
+        })
         
         ## Settings button UI
         
